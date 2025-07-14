@@ -16,3 +16,5 @@ About the project settings:
   - SQL (PostgreSQL)
 - GitHub
 - Docker (to deploy the app)
+
+Public URL: https://next-app-project-730620414472.us-central1.run.app/
