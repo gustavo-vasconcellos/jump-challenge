@@ -1,4 +1,4 @@
-import { ButtonTest } from "@/components/ButtonTest";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <ButtonTest />
+          <button className="btn btn-primary">Get Started</button>
         </div>
       </div>
     </div>
