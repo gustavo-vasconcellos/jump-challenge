@@ -2,8 +2,6 @@
 
 import { useQuery } from "react-query";
 
-export interface Props {}
-
 interface Rates {
   result: string;
   provider: string;
@@ -18,7 +16,7 @@ interface Rates {
   rates: Record<string, number>;
 }
 
-export function SelectCurrency(props: Props) {
+export function SelectCurrency() {
   const { data, isLoading } = useQuery({
     queryKey: ["currency-rates"],
     queryFn: () =>
