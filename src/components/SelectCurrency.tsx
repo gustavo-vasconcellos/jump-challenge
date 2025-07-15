@@ -20,22 +20,30 @@ interface Rates {
 
 export function SelectCurrency(props: Props) {
   const { data, isLoading } = useQuery({
+    queryKey: ["currency-rates"],
     queryFn: () =>
-      fetch("https://open.er-api.com/v6/latest/USD", { cache: "force-cache" }).then((res) => res.json()),
+      fetch("https://open.er-api.com/v6/latest/USD", {
+        cache: "force-cache",
+      }).then((res) => res.json() as Promise<Rates>),
   });
 
   if (isLoading || !data) return null;
 
   return (
-    <select className="select" name="currency">
-      <option disabled>
-        Pick a currency to Convert
-      </option>
-      {Object.entries((data as unknown as Rates).rates).map(([key, value]) => (
-        <option value={`${key}-${value}`} key={key}>
-          {key}
-        </option>
-      ))}
-    </select>
+    <div className="flex flex-row gap-1 items-center">
+      <label htmlFor="currency">to</label>
+      <select className="select" name="currency">
+        <option disabled>Pick a currency</option>
+        {Object.entries(data.rates).map(([key, value]) => {
+          if (key === "USD") return null;
+
+          return (
+            <option value={`${key}-${value}`} key={key}>
+              {key}
+            </option>
+          );
+        })}
+      </select>
+    </div>
   );
 }

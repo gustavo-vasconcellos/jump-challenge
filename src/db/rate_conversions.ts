@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 
 export function getConversionsHistory(pool: Pool) {
-  return pool.query(
+  return pool.query<DBConversion>(
     `SELECT 
       id, 
       currency, 
@@ -12,9 +12,17 @@ export function getConversionsHistory(pool: Pool) {
 }
 
 export interface Conversion {
+  id?: number;
   currency: string;
   original: number;
   converted: number;
+}
+
+interface DBConversion {
+  id?: number;
+  currency: string;
+  original_value_in_cents: number;
+  converted_value_in_cents: number;
 }
 
 export function addConversion(pool: Pool, data: Conversion) {
